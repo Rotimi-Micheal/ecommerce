@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import CartCount from "./cart/CartCount";
 import CartEmpty from "./cart/CartEmpty";
 import CartItem from "./cart/CartItem";
@@ -7,6 +7,9 @@ import {
   selectCartState,
   selectCartItems,
   clearCartItems,
+  getTotals,
+  selectTotalAmount,
+  selectTotalQuantity,
 } from "../app/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,7 +17,12 @@ const Cart = () => {
   const dispatch = useDispatch();
   const ifCartState = useSelector(selectCartState);
   const cartItems = useSelector(selectCartItems);
-  console.log(cartItems);
+  const TotalAmount = useSelector(selectTotalAmount);
+  const TotalQuantity = useSelector(selectTotalQuantity);
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cartItems, dispatch]);
 
   const onToggleCart = () => {
     dispatch(setCloseCart({ cartState: false }));
@@ -37,11 +45,12 @@ const Cart = () => {
           className={`blur-effect-theme h-screen max-w-xl w-full absolute right-0`}
         >
           <CartCount
+            TotalQuantity={TotalQuantity}
             onToggleCart={onToggleCart}
             clearCartHandler={clearCartHandler}
           />
           {cartItems?.length === 0 ? (
-            <CartEmpty />
+            <CartEmpty onToggleCart={onToggleCart} />
           ) : (
             <div>
               <div className="flex items-start justify-start flex-col gap-y-7 lg:gap-y-5 overflow-y-scroll h-[75vh] scroll-smooth py-3">
@@ -56,7 +65,7 @@ const Cart = () => {
                     Total Cart Price
                   </h1>
                   <h1 className="text-sm rounded bg-theme-cart text-slate-100 py-0.5 px-3">
-                    000
+                    {TotalAmount}
                   </h1>
                 </div>
                 <div className="grid items-center gap-2">
