@@ -1,13 +1,4 @@
 import React, { Fragment } from "react";
-// import {
-//   Footer,
-//   Stories,
-//   FlexContent,
-//   Hero,
-//   Sales,
-//   NavBar,
-//   Cart,
-// } from "./components/Index.js";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import NavBar from "./components/NavBar";
@@ -15,7 +6,6 @@ import FlexContent from "./components/FlexContent";
 import Hero from "./components/Hero";
 import Sales from "./components/Sales";
 import Stories from "./components/Stories";
-// import { FlexContent, Hero, Sales, Stories, Footer, Cart } from "./components";
 
 import {
   footerAPI,
