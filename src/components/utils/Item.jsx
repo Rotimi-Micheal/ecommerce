@@ -1,5 +1,7 @@
 import { StarIcon, ShoppingBagIcon } from "@heroicons/react/24/solid";
 import React, { Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../app/CartSlice";
 
 const Item = ({
   ifExists,
@@ -13,10 +15,15 @@ const Item = ({
   rating,
   price,
 }) => {
+  const dispatch = useDispatch();
+  const onAddToCart = () => {
+    const cartItem = { id, title, text, img, color, shadow, price };
+    dispatch(addItemToCart(cartItem));
+  };
   return (
     <Fragment>
       <div
-        className={`relative bg-gradient-to-b ${color} ${shadow} grid items-center ${
+        className={`relative bg-gradient-to-b  ${color} ${shadow} grid items-center ${
           ifExists ? "justify-items-start" : "justify-items-center"
         }  rounded-xl py-4 px-5 transition-all duration-700 ease-in-out w-full hover:scale-105`}
       >
@@ -47,7 +54,10 @@ const Item = ({
               type="button"
               className="bg-white/90 blur-effect-theme button-theme p-0.5 shadow shadow-slate-200"
             >
-              <ShoppingBagIcon className="icon-style text-slate-900" />
+              <ShoppingBagIcon
+                onClick={onAddToCart}
+                className="icon-style text-slate-900"
+              />
             </button>
             <button
               type="button"

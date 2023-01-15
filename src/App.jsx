@@ -6,6 +6,7 @@ import {
   Hero,
   Sales,
   NavBar,
+  Cart,
 } from "./components";
 import {
   footerAPI,
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <Fragment>
       <NavBar />
+      <Cart />
       <main className="flex flex-col gap-32 relative ">
         <Hero heroapi={heroapi} />
         <Sales endpoint={popularsales} ifExists />

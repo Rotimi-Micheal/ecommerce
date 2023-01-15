@@ -1,13 +1,20 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   HeartIcon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.png";
+import { setOpenCart } from "../app/CartSlice";
 
 const NavBar = () => {
   const [navState, setNavState] = useState(false);
+  const dispatch = useDispatch();
+
+  const onCartToggle = () => {
+    dispatch(setOpenCart({ cartState: true }));
+  };
 
   const onNavScroll = () => {
     window.scrollY > 30 ? setNavState(true) : setNavState(false);
@@ -55,6 +62,7 @@ const NavBar = () => {
             </li>
             <li className="grid items-cener">
               <button
+                onClick={onCartToggle}
                 type="button "
                 className="border-none outline-none active:scale-110 transition-all duration-300 relative"
               >
