@@ -7,7 +7,7 @@ import {
   Sales,
   NavBar,
   Cart,
-} from "./components";
+} from "./components/Index.js";
 import {
   footerAPI,
   heroapi,
